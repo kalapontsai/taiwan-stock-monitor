@@ -207,3 +207,4 @@ marimo/_lsp/
 __marimo__/
 api.key
 note.txt
+resend_trial.py
