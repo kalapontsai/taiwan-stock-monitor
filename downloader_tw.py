@@ -41,7 +41,7 @@ def get_full_stock_list():
             resp = requests.get(cfg['url'], timeout=15)
             df_list = pd.read_html(StringIO(resp.text), header=0)
             if not df_list: continue
-            df = df_list[0].head(10)  # 只取前10筆資料
+            df = df_list[0].head(100)  # 只取前100筆資料
             for _, row in df.iterrows():
                 code = str(row['有價證券代號']).strip()
                 name = str(row['有價證券名稱']).strip()
