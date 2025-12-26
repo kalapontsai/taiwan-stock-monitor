@@ -41,13 +41,15 @@ def get_full_stock_list():
             resp = requests.get(cfg['url'], timeout=15)
             df_list = pd.read_html(StringIO(resp.text), header=0)
             if not df_list: continue
-            df = df_list[0]
+            df = df_list[0].head(10)  # 只取前10筆資料
             for _, row in df.iterrows():
                 code = str(row['有價證券代號']).strip()
                 name = str(row['有價證券名稱']).strip()
                 if code and '有價證券' not in code:
                     all_items.append(f"{code}{cfg['suffix']}&{name}")
+                    print(f"{code}{cfg['suffix']}&{name}")
         except: continue
+    print('all_items: ', all_items)
     return list(set(all_items))
 
 def download_stock_data(item):

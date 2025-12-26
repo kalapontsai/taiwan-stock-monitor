@@ -1,0 +1,29 @@
+name: Global Market Monitor Parallel
+
+on:
+  schedule:
+    # 台北時間週一至週五 18:30 (UTC 10:30)
+    - cron: '30 10 * * 1-5'
+  workflow_dispatch: 
+
+jobs:
+  # --- 任務 B：台灣市場 ---
+  taiwan-market:
+    name: 🇹🇼 Taiwan Market Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Environment Setup
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk
+          python -m pip install --upgrade pip
+          pip install pandas yfinance requests lxml tqdm resend matplotlib numpy
+      - name: Run TW Analysis
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: python main.py --market tw-share
+
