@@ -35,13 +35,14 @@ def get_full_stock_list():
         {'name': 'otc_innovation', 'url': 'https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=A&issuetype=C&industry_code=&Page=1&chklike=Y', 'suffix': '.TWO'},
     ]
     all_items = []
+    top50_items = []
     log("📡 正在獲取各市場清單...")
     for cfg in url_configs:
         try:
             resp = requests.get(cfg['url'], timeout=15)
             df_list = pd.read_html(StringIO(resp.text), header=0)
             if not df_list: continue
-            df = df_list[0].head(100)  # 只取前100筆資料
+            df = df_list[0]
             for _, row in df.iterrows():
                 code = str(row['有價證券代號']).strip()
                 name = str(row['有價證券名稱']).strip()
@@ -56,7 +57,9 @@ def get_full_stock_list():
                     #0050.TW&元大台灣50
         except: continue
     #all_items:  ['1101.TW&台泥', '1102.TW&亞泥']
-    return list(set(all_items))
+    #先取50筆資料測試
+    top50_items = all_items[:50]
+    return list(set(top50_items))
 
 def download_stock_data(item):
     """具備隨機延遲與自動重試的下載邏輯"""
