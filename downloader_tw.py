@@ -47,9 +47,15 @@ def get_full_stock_list():
                 name = str(row['有價證券名稱']).strip()
                 if code and '有價證券' not in code:
                     all_items.append(f"{code}{cfg['suffix']}&{name}")
-                    print(f"{code}{cfg['suffix']}&{name}")
+                    #1101.TW&台泥
+                    #1102.TW&亞泥
+                    #1103.TW&嘉泥
+                    #1104.TW&環泥
+                    #1108.TW&幸福
+                    #1109.TW&信大
+                    #0050.TW&元大台灣50
         except: continue
-    print('all_items: ', all_items)
+    #all_items:  ['1101.TW&台泥', '1102.TW&亞泥']
     return list(set(all_items))
 
 def download_stock_data(item):
