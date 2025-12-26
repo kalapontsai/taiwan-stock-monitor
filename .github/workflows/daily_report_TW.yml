@@ -1,4 +1,4 @@
-name: Global Market Monitor Parallel
+name: Taiwan Market Monitor
 
 on:
   schedule:
