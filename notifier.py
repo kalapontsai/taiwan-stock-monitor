@@ -103,7 +103,11 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
 
     # 6. 執行寄送
     # 請確保收件人正確
+<<<<<<< HEAD
     to_emails = ["kadelat@mail.com"]
+=======
+    to_emails = ["kadelat@gmail.com"]
+>>>>>>> 91540c091317097fcb0dd5eefa1603674d91a779
 
     try:
         resend.Emails.send({
@@ -115,4 +119,5 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
         })
         print(f"✅ 郵件發送成功！市場：{market_name}")
     except Exception as e:
+
         print(f"❌ 郵件發送失敗 ({market_name}): {e}")
