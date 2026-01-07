@@ -58,8 +58,8 @@ def get_full_stock_list():
         except: continue
     #all_items:  ['1101.TW&台泥', '1102.TW&亞泥']
     #先取50筆資料測試
-    top50_items = all_items[:50]
-    return list(set(top50_items))
+    #top50_items = all_items[:50]
+    return list(set(all_items))
 
 def download_stock_data(item):
     """具備隨機延遲與自動重試的下載邏輯"""
@@ -147,5 +147,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
