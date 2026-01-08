@@ -22,5 +22,6 @@ jobs:
       - name: Run TW Analysis
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          TO_EMAILS: ${{ secrets.TO_EMAILS }}
         run: python main.py --market tw-share
 
