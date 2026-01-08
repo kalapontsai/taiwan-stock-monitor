@@ -103,7 +103,7 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
 
     # 6. 執行寄送
     # 請確保收件人正確
-    to_emails = [TO_EMAILS]
+    to_emails = [os.environ.get("TO_EMAILS")]
     try:
         r = resend.Emails.send({
             "from": "onboarding@resend.dev",
@@ -123,5 +123,6 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
     except Exception as e:
 
         print(f"❌ 郵件發送失敗 ({market_name}): {e}")
+
 
 
