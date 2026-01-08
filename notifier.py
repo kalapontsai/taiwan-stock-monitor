@@ -105,15 +105,23 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
     # 請確保收件人正確
     to_emails = [TO_EMAILS]
     try:
-        resend.Emails.send({
-            "from": "StockMonitor <onboarding@resend.dev>",
+        r = resend.Emails.send({
+            "from": "onboarding@resend.dev",
             "to": to_emails,
-            "subject": f"🚀 {market_name} 監控報告 - {now_str}",
+            "subject": f"{market_name} 監控報告 - {now_str}",
             "html": html_content,
             "attachments": attachments
-        })
+            })
+        #resend.Emails.send({
+        #    "from": "StockMonitor <onboarding@resend.dev>",
+        #    #"to": to_emails,
+        #    "subject": f"🚀 {market_name} 監控報告 - {now_str}",
+        #    "html": html_content,
+        #    "attachments": attachments
+        #})
         print(f"✅ 郵件發送成功！市場：{market_name}")
     except Exception as e:
 
         print(f"❌ 郵件發送失敗 ({market_name}): {e}")
+
 
